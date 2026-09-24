@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Grace Wax — Smooth Skin. Effortless Confidence.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F8F3EA; --cream-deep:#F1E9DB; --beige:#E7DCC6;
+  --gold:#B9985A; --gold-soft:#D8C39C;
+  --brown:#3B2E22; --brown-soft:#6E5C46;
+  --white:#FFFDF9;
+  --shadow: 0 20px 50px -25px rgba(59,46,34,.35);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth; scroll-padding-top:90px;}
+body{
+  font-family:'Jost',sans-serif; color:var(--brown); background:var(--cream);
+  font-weight:300; line-height:1.7; -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ }
+}
+h1,h2,h3{font-family:'Cormorant Garamond',serif; font-weight:500; color:var(--brown); letter-spacing:.01em;}
+img,svg{max-width:100%; display:block;}
+a{text-decoration:none; color:inherit;}
+.wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+section{padding:120px 0;}
+@media(max-width:768px){ section{padding:80px 0;} .wrap{padding:0 22px;} }
+
+/* Placeholder photography block */
+.photo{
+  position:relative; border-radius:4px; overflow:hidden; background:
+    radial-gradient(circle at 30% 20%, #ECE0C8, transparent 60%),
+    linear-gradient(135deg, var(--beige), var(--gold-soft) 55%, var(--cream-deep));
+  min-height:220px;
+}
+.photo::after{
+  content:attr(data-label); position:absolute; left:20px; bottom:18px;
+  font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--white);
+  font-size:.95rem; letter-spacing:.03em; text-shadow:0 2px 10px rgba(0,0,0,.25);
+}
+.photo::before{ content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(59,46,34,.28), transparent 45%); }
+
+/* Buttons */
+.btn{
+  display:inline-flex; align-items:center; gap:10px; padding:16px 34px;
+  border-radius:2px; font-family:'Jost',sans-serif; font-size:.92rem;
+  letter-spacing:.04em; cursor:pointer; border:1px solid transparent;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, background .35s ease, color .35s ease;
+}
+.btn-primary{ background:var(--brown); color:var(--white); }
+.btn-primary:hover{ background:var(--gold); box-shadow:var(--shadow); transform:translateY(-2px); }
+.btn-outline{ border-color:var(--brown-soft); color:var(--brown); background:transparent; }
+.btn-outline:hover{ border-color:var(--brown); background:var(--brown); color:var(--white); transform:translateY(-2px); }
+.btn-gold{ background:var(--gold); color:var(--white); }
+.btn-gold:hover{ background:var(--brown); box-shadow:var(--shadow); transform:translateY(-2px); }
+
+/* Nav */
+header{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  padding-top:env(safe-area-inset-top,0px);
+  background:rgba(248,243,234,.88); backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(59,46,34,.08);
+  transition:background .3s ease;
+}
+nav{ display:flex; align-items:center; justify-content:space-between; max-width:1180px; margin:0 auto; padding:20px 32px; }
+.logo{ font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:600; letter-spacing:.05em; }
+.nav-links{ display:flex; gap:38px; align-items:center; font-size:.9rem; letter-spacing:.03em; }
+.nav-links a{ position:relative; padding:4px 0; color:var(--brown-soft); transition:color .25s; }
+.nav-links a:not(.btn):after{ content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--gold); transition:width .3s ease; }
+.nav-links a:not(.btn):hover{ color:var(--brown); }
+.nav-links a:not(.btn):hover:after{ width:100%; }
+.nav-links .btn{ padding:11px 24px; font-size:.85rem; }
+.hamburger{ display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; }
+.hamburger span{ width:24px; height:1.5px; background:var(--brown); display:block; }
+@media(max-width:860px){
+  .nav-links{ position:fixed; top:0; right:-100%; height:100vh; width:78%; max-width:340px;
+    background:var(--white); flex-direction:column; justify-content:center; align-items:flex-start;
+    padding:40px; gap:28px; transition:right .4s cubic-bezier(.2,.8,.2,1); box-shadow:-10px 0 40px rgba(0,0,0,.08);}
+  .nav-links.open{ right:0; }
+  .hamburger{ display:flex; }
+}
+
+/* Hero */
+.hero{
+  min-height:100svh; display:flex; align-items:center; position:relative;
+  padding-top:110px;
+  background:
+    radial-gradient(ellipse 900px 500px at 78% 18%, rgba(185,152,90,.18), transparent 60%),
+    linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
+}
+.hero-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:70px; align-items:center; }
+@media(max-width:900px){ .hero-grid{ grid-template-columns:1fr; gap:40px; } }
+.eyebrow{ color:var(--gold); font-size:.85rem; letter-spacing:.12em; margin-bottom:20px; font-style:italic; font-family:'Cormorant Garamond',serif;}
+.hero h1{ font-size:clamp(2.6rem,5.2vw,4.4rem); line-height:1.08; margin-bottom:26px; }
+.hero p{ font-size:1.12rem; color:var(--brown-soft); max-width:480px; margin-bottom:38px; }
+.hero-ctas{ display:flex; gap:18px; flex-wrap:wrap; margin-bottom:34px; }
+.trust{ font-size:.82rem; letter-spacing:.08em; color:var(--brown-soft); }
+.hero-photo{ aspect-ratio:4/5; border-radius:4px; }
+.hero-photo::after{ content:""; }
+
+/* About */
+.about{ display:grid; grid-template-columns:.9fr 1.1fr; gap:80px; align-items:center; }
+@media(max-width:900px){ .about{ grid-template-columns:1fr; gap:40px; } }
+.about-photo{ aspect-ratio:5/6; }
+.about h2{ font-size:2.6rem; margin-bottom:26px; }
+.about p{ color:var(--brown-soft); font-size:1.06rem; max-width:520px; }
+
+/* Section head */
+.section-head{ margin-bottom:64px; max-width:640px; }
+.section-head h2{ font-size:2.6rem; margin-bottom:16px; }
+.section-head p{ color:var(--brown-soft); font-size:1.05rem; }
+.center{ margin-left:auto; margin-right:auto; text-align:center; }
+
+/* Services */
+.services{ background:var(--white); }
+.cat-label{ font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--gold); font-size:1.1rem; margin:52px 0 22px; letter-spacing:.02em;}
+.cat-label:first-of-type{ margin-top:0; }
+.service-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:22px; }
+.service-card{
+  background:var(--cream); border-radius:4px; padding:30px 28px; border:1px solid rgba(59,46,34,.06);
+  transition:transform .35s ease, box-shadow .35s ease;
+}
+.service-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow); }
+.service-card h3{ font-size:1.35rem; margin-bottom:10px; }
+.service-card p{ color:var(--brown-soft); font-size:.92rem; margin-bottom:20px; min-height:44px; }
+.service-foot{ display:flex; align-items:center; justify-content:space-between; padding-top:16px; border-top:1px solid rgba(59,46,34,.08);}
+.price{ font-family:'Cormorant Garamond',serif; font-size:1.15rem; color:var(--gold); font-style:italic;}
+.book-link{ font-size:.82rem; letter-spacing:.04em; border-bottom:1px solid var(--brown); padding-bottom:2px; transition:border-color .25s, color .25s;}
+.book-link:hover{ color:var(--gold); border-color:var(--gold); }
+.view-all{ text-align:center; margin-top:56px; }
+
+/* Why choose - features */
+.feature-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:30px; }
+@media(max-width:900px){ .feature-grid{ grid-template-columns:repeat(2,1fr); } }
+@media(max-width:520px){ .feature-grid{ grid-template-columns:1fr; } }
+.feature{ text-align:left; }
+.feature-mark{ width:44px; height:1px; background:var(--gold); margin-bottom:22px; }
+.feature h3{ font-size:1.3rem; margin-bottom:12px; }
+.feature p{ color:var(--brown-soft); font-size:.95rem; }
+
+/* Experience steps */
+.experience{ background:var(--brown); color:var(--white); }
+.experience .section-head h2, .experience .section-head p{ color:var(--white); }
+.experience .section-head p{ color:#D9CBB5; }
+.steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:50px; }
+@media(max-width:800px){ .steps{ grid-template-columns:1fr; gap:44px; } }
+.step-num{ font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--gold-soft); font-size:1.1rem; margin-bottom:18px; }
+.step h3{ color:var(--white); font-size:1.7rem; margin-bottom:12px; }
+.step p{ color:#CBBBA0; font-size:.98rem; max-width:280px; }
+
+/* Testimonials */
+.testi-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+@media(max-width:860px){ .testi-grid{ grid-template-columns:1fr; } }
+.testi-card{ background:var(--white); border-radius:4px; padding:36px 32px; border:1px solid rgba(59,46,34,.06); }
+.stars{ color:var(--gold); letter-spacing:3px; margin-bottom:18px; font-size:.9rem; }
+.testi-card p{ font-style:italic; font-family:'Cormorant Garamond',serif; font-size:1.15rem; color:var(--brown); margin-bottom:22px; }
+.testi-name{ font-size:.85rem; letter-spacing:.04em; color:var(--brown-soft); }
+
+/* Gallery */
+.gallery-grid{ display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:150px; gap:16px; }
+.gallery-grid .photo:nth-child(1){ grid-column:span 2; grid-row:span 2; }
+.gallery-grid .photo:nth-child(4){ grid-row:span 2; }
+.gallery-grid .photo:nth-child(6){ grid-column:span 2; }
+@media(max-width:768px){
+  .gallery-grid{ grid-template-columns:repeat(2,1fr); grid-auto-rows:140px; }
+  .gallery-grid .photo:nth-child(1){ grid-column:span 2; grid-row:span 1; }
+  .gallery-grid .photo:nth-child(4){ grid-row:span 1; }
+  .gallery-grid .photo:nth-child(6){ grid-column:span 1; }
+}
+
+/* Booking band */
+.booking{
+  background:linear-gradient(120deg, var(--brown), #4a3a2b);
+  color:var(--white); text-align:center; border-radius:4px;
+  padding:90px 40px; position:relative; overflow:hidden;
+}
+.booking::before{ content:""; position:absolute; inset:0; background:radial-gradient(circle at 85% 20%, rgba(185,152,90,.25), transparent 55%); }
+.booking-inner{ position:relative; }
+.booking h2{ color:var(--white); font-size:2.8rem; margin-bottom:18px; }
+.booking p{ color:#D9CBB5; max-width:480px; margin:0 auto 36px; }
+
+/* Contact */
+.contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:70px; }
+@media(max-width:900px){ .contact-grid{ grid-template-columns:1fr; gap:44px; } }
+.contact-list{ list-style:none; margin-top:28px; }
+.contact-list li{ padding:16px 0; border-bottom:1px solid rgba(59,46,34,.1); display:flex; justify-content:space-between; font-size:.95rem; }
+.contact-list li span:first-child{ color:var(--brown-soft); letter-spacing:.03em; }
+.map{ aspect-ratio:4/3; border-radius:4px; background:
+  repeating-linear-gradient(45deg, var(--cream-deep), var(--cream-deep) 12px, var(--beige) 12px, var(--beige) 24px);
+  display:flex; align-items:center; justify-content:center; color:var(--brown-soft); font-style:italic; font-family:'Cormorant Garamond',serif;}
+form{ display:flex; flex-direction:column; gap:16px; margin-top:28px; }
+form input, form textarea{
+  background:var(--white); border:1px solid rgba(59,46,34,.15); border-radius:2px; padding:15px 16px;
+  font-family:'Jost',sans-serif; font-size:.95rem; color:var(--brown); resize:vertical;
+}
+form input:focus, form textarea:focus{ outline:2px solid var(--gold); outline-offset:1px; }
+
+/* Footer */
+footer{ background:var(--brown); color:#D9CBB5; padding:70px 0 30px; }
+.foot-top{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:40px; padding-bottom:44px; border-bottom:1px solid rgba(255,255,255,.12); }
+.foot-logo{ font-family:'Cormorant Garamond',serif; color:var(--white); font-size:1.7rem; margin-bottom:10px; }
+.foot-tag{ font-style:italic; font-family:'Cormorant Garamond',serif; color:var(--gold-soft); }
+.foot-links{ display:flex; gap:30px; flex-wrap:wrap; font-size:.9rem; }
+.foot-links a:hover{ color:var(--white); }
+.foot-social{ display:flex; gap:18px; }
+.foot-social a{ width:38px; height:38px; border:1px solid rgba(255,255,255,.25); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:background .25s, border-color .25s; }
+.foot-social a:hover{ background:var(--gold); border-color:var(--gold); }
+.foot-bottom{ padding-top:26px; font-size:.8rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; color:#A6957D;}
+
+/* Reveal animation */
+.reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease; }
+.reveal.in{ opacity:1; transform:none; }
+@media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; transition:none; } }
+
+/* WhatsApp float */
+.wa-float{
+  position:fixed; right:24px; bottom:calc(24px + env(safe-area-inset-bottom,0px)); z-index:90;
+  width:56px; height:56px; border-radius:50%; background:var(--brown); color:var(--white);
+  display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow);
+  transition:transform .3s ease, background .3s ease;
+}
+.wa-float:hover{ transform:scale(1.08); background:var(--gold); }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#home" class="logo">Grace Wax</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+      <a href="#booking" class="btn btn-primary">Book Appointment</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Grace Wax Studio</div>
+      <h1>Smooth Skin. Effortless Confidence.</h1>
+      <p>Professional waxing services designed to leave your skin smooth, soft, and beautifully cared for.</p>
+      <div class="hero-ctas">
+        <a href="#booking" class="btn btn-primary">Book an Appointment</a>
+        <a href="#services" class="btn btn-outline">Explore Services</a>
+      </div>
+      <div class="trust">Professional &nbsp;•&nbsp; Hygienic &nbsp;•&nbsp; Comfortable</div>
+    </div>
+    <div class="photo hero-photo" data-label="Grace Wax Studio"></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about">
+    <div class="photo about-photo reveal" data-label="A moment of self-care"></div>
+    <div class="reveal">
+      <h2>Welcome to Grace Wax</h2>
+      <p>At Grace Wax, we believe waxing should be more than just hair removal. It's a moment of self-care. Our goal is to provide a comfortable, hygienic, and professional experience while helping every client feel confident in their skin.</p>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Our Services</h2>
+      <p>Thoughtfully performed treatments for face, body, and bikini — each one designed around your comfort.</p>
+    </div>
+
+    <div class="cat-label reveal">Face</div>
+    <div class="service-grid reveal">
+      <div class="service-card">
+        <h3>Eyebrow Wax</h3>
+        <p>Precise shaping for a clean, defined brow line.</p>
+        <div class="service-foot"><span class="price">from $__</span><a class="book-link" href="#booking">Book Now</a></div>
+      </div>
+      <div class="service-card">
+        <h3>Upper Lip</h3>
+        <p>Quick, gentle removal for smooth results.</p>
+        <div class="service-foot"><span class="price">from $__</span><a class="book-link" href="#booking">Book Now</a></div>
+      </div>
+      <div class="service-card">
+        <h3>Chin</h3>
+        <p>Targeted treatment for a soft, even finish.</p>
+        <div class="service-foot"><span class="price">from $__</span><a class="book-link" href="#booking">Book Now</a></div>
+      </div>
+      <div class="service-card">
+        <h3>Full Face</h3>
+        <p>Complete facial waxing for all-over smoothness.</p>
+        <div class="service-foot"><span class="price">from $__</span><a class="book-link" href="#booking">Book Now</a></div>
+      </div>
+    </div>
+
+    <div class="cat-label reveal">Body</div>
+    <div class="service-grid reveal">
+      <div class="service-card">
+        <h3>Underarms</h3>
+        <p>Fast, comfortable care for sensitive skin.</p>
+        <div class="service-foot"><span class="price">from $__</span><a class="book-link" href="#booking">Book Now</a></div>
+      </div>
+      <div class="service-card">
+        <h3>Half Legs</h3>
+        <p>Smooth lower or upper legs in one visit.</p>
+        <div class="service-foot"><span class="price">from $__</span><a class="book-link" href="#booking">Book Now</a></div>
+      </div>
+      <div class="service-card">
+        <h3>Full Legs</h3>
+        <p>Complete leg treatment, silky from top to toe.</p>
+        <div class="service-foot"><span class="price">from $__</span><a class="book-link" href="#booking">Book Now</a></div>
+      </div>
+      <div class="service-card">
+        <h3>Arms</h3>
+        <p>Even, gentle removal for soft arms.</p>
+        <div class="service-foot"><span class="price">from $__</span><a class="book-link" href="#booking">Book Now</a></div>
+      </div>
+    </div>
+
+    <div class="cat-label reveal">Bikini</div>
+    <div class="service-grid reveal">
+      <div class="service-card">
+        <h3>Bikini Wax</h3>
+        <p>Clean, comfortable shaping along the bikini line.</p>
+        <div class="service-foot"><span class="price">from $__</span><a class="book-link" href="#booking">Book Now</a></div>
+      </div>
+      <div class="service-card">
+        <h3>Brazilian Wax</h3>
+        <p>Thorough, private, and handled with care.</p>
+        <div class="service-foot"><span class="price">from $__</span><a class="book-link" href="#booking">Book Now</a></div>
+      </div>
+    </div>
+
+    <div class="view-all reveal"><a href="#" class="btn btn-outline">View All Services</a></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head center reveal" style="margin-left:auto;margin-right:auto;">
+      <h2>Why Choose Grace Wax</h2>
+    </div>
+    <div class="feature-grid reveal">
+      <div class="feature"><div class="feature-mark"></div><h3>Professional Care</h3><p>Your comfort and satisfaction come first.</p></div>
+      <div class="feature"><div class="feature-mark"></div><h3>Hygienic Standards</h3><p>Clean, careful, and professional treatment practices.</p></div>
+      <div class="feature"><div class="feature-mark"></div><h3>Quality Products</h3><p>Carefully selected products for a comfortable waxing experience.</p></div>
+      <div class="feature"><div class="feature-mark"></div><h3>Confidence Starts Here</h3><p>Feel smooth, confident, and ready for anything.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>The Grace Experience</h2>
+      <p>Three simple steps between you and smooth, confident skin.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step"><div class="step-num">01 — Book</div><h3>Book</h3><p>Choose your service and schedule your appointment.</p></div>
+      <div class="step"><div class="step-num">02 — Relax</div><h3>Relax</h3><p>Arrive, get comfortable, and let us take care of the rest.</p></div>
+      <div class="step"><div class="step-num">03 — Glow</div><h3>Glow</h3><p>Leave feeling smooth, refreshed, and confident.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>What Clients Say</h2>
+      <p>Real feedback from clients — swap in your own reviews any time.</p>
+    </div>
+    <div class="testi-grid reveal">
+      <div class="testi-card"><div class="stars">★★★★★</div><p>"The most comfortable waxing experience I've had. Clean space, gentle hands, and my skin has never felt smoother."</p><div class="testi-name">— Client Name, Service</div></div>
+      <div class="testi-card"><div class="stars">★★★★★</div><p>"Professional from start to finish. I always leave feeling confident and cared for."</p><div class="testi-name">— Client Name, Service</div></div>
+      <div class="testi-card"><div class="stars">★★★★★</div><p>"Booking was easy and the results speak for themselves. Highly recommend Grace Wax."</p><div class="testi-name">— Client Name, Service</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Gallery</h2>
+      <p>A look inside the Grace Wax studio.</p>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="photo" data-label="Studio"></div>
+      <div class="photo" data-label="Treatment"></div>
+      <div class="photo" data-label="Products"></div>
+      <div class="photo" data-label="Results"></div>
+      <div class="photo" data-label="Lifestyle"></div>
+      <div class="photo" data-label="Relax"></div>
+    </div>
+  </div>
+</section>
+
+<section id="booking">
+  <div class="wrap">
+    <div class="booking reveal">
+      <div class="booking-inner">
+        <h2>Ready for Smooth?</h2>
+        <p>Treat yourself to a little self-care. Book your next waxing appointment with Grace Wax.</p>
+        <a href="#contact" class="btn btn-gold">Book Your Appointment</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <h2 style="font-size:2.4rem;margin-bottom:14px;">Get in Touch</h2>
+      <p style="color:var(--brown-soft);">We'd love to welcome you to Grace Wax.</p>
+      <ul class="contact-list">
+        <li><span>Phone / WhatsApp</span><span>[INSERT NUMBER]</span></li>
+        <li><span>Instagram</span><span>[INSERT INSTAGRAM]</span></li>
+        <li><span>Email</span><span>[INSERT EMAIL]</span></li>
+        <li><span>Location</span><span>[INSERT LOCATION]</span></li>
+        <li><span>Hours</span><span>[INSERT HOURS]</span></li>
+      </ul>
+      <div class="map" style="margin-top:28px;">Map placeholder</div>
+    </div>
+    <form class="reveal" onsubmit="event.preventDefault(); this.reset(); alert('Thank you — we will be in touch shortly.');">
+      <input type="text" placeholder="Full name" required>
+      <input type="email" placeholder="Email" required>
+      <input type="tel" placeholder="Phone">
+      <textarea rows="4" placeholder="Tell us what you're looking for"></textarea>
+      <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="foot-logo">Grace Wax</div>
+        <div class="foot-tag">Smooth skin. Effortless confidence.</div>
+      </div>
+      <div class="foot-links">
+        <a href="#home">Home</a><a href="#services">Services</a><a href="#about">About</a>
+        <a href="#gallery">Gallery</a><a href="#booking">Book</a><a href="#contact">Contact</a>
+      </div>
+      <div class="foot-social">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="WhatsApp">WA</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Grace Wax. All rights reserved.</span>
+      <span>Crafted with care.</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="#" aria-label="Book via WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a10 10 0 0 0-8.7 15L2 22l5.2-1.3A10 10 0 1 0 12 2z"/><path d="M8.5 8.7c.2-.5.4-.5.6-.5h.5c.2 0 .4 0 .6.4l.7 1.7c.1.2 0 .4-.1.6l-.4.5c-.1.2-.2.3 0 .6.5.9 1.5 1.9 2.4 2.4.3.2.4.1.6 0l.5-.4c.2-.1.4-.2.6-.1l1.7.7c.4.2.4.4.4.6v.5c0 .2 0 .4-.5.6-1.6.6-3.7-.5-5.4-2.2-1.7-1.7-2.8-3.8-2.2-5.4z"/></svg>
+</a>
+
+<script>
+document.getElementById('hamburger').addEventListener('click',function(){
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('.nav-links a').forEach(function(a){
+  a.addEventListener('click',function(){ document.getElementById('navLinks').classList.remove('open'); });
+});
+if('IntersectionObserver' in window){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+} else {
+  document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+}
+</script>
+</body>
+</html>
